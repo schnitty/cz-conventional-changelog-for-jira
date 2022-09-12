@@ -396,6 +396,138 @@ describe('commit message', function() {
       )
     ).to.equal(`${type}(${scope}): ${subject}\n\n${body}\n\n${jiraUpperCase}\n\n${breakingChange}${breaking}`);
   });
+  it('pre-type-and-post-body jiraLocation with body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body
+        },
+        { ...defaultOptions, jiraLocation: 'pre-type-and-post-body' }
+      )
+    ).to.equal(`${jiraUpperCase} ${type}(${scope}): ${subject}\n\n${body}\n\n${jiraUpperCase}`);
+  });
+  it('pre-type-and-post-body jiraLocation no body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body: false
+        },
+        { ...defaultOptions, jiraLocation: 'pre-type-and-post-body' }
+      )
+    ).to.equal(`${jiraUpperCase} ${type}(${scope}): ${subject}\n\n${jiraUpperCase}`);
+  });
+  it('pre-type-and-post-body jiraLocation with body and footer', function() {
+    var footer = `${breakingChange}${breaking}`;
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body,
+          breaking,
+        },
+        { ...defaultOptions, jiraLocation: 'pre-type-and-post-body' }
+      )
+    ).to.equal(`${jiraUpperCase} ${type}(${scope}): ${subject}\n\n${body}\n\n${jiraUpperCase}\n\n${breakingChange}${breaking}`);
+  });
+  it('pre-description-and-post-body jiraLocation with body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body
+        },
+        { ...defaultOptions, jiraLocation: 'pre-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${jiraUpperCase} ${subject}\n\n${body}\n\n${jiraUpperCase}`);
+  });
+  it('pre-description-and-post-body jiraLocation no body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body: false
+        },
+        { ...defaultOptions, jiraLocation: 'pre-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${jiraUpperCase} ${subject}\n\n${jiraUpperCase}`);
+  });
+  it('pre-descripition-and-post-body jiraLocation with body and footer', function() {
+    var footer = `${breakingChange}${breaking}`;
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body,
+          breaking,
+        },
+        { ...defaultOptions, jiraLocation: 'pre-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${jiraUpperCase} ${subject}\n\n${body}\n\n${jiraUpperCase}\n\n${breakingChange}${breaking}`);
+  });
+  it('post-description-and-post-body jiraLocation with body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body
+        },
+        { ...defaultOptions, jiraLocation: 'post-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${subject} ${jiraUpperCase} \n\n${body}\n\n${jiraUpperCase}`);
+  });
+  it('post-description-and-post-body jiraLocation no body', function() {
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body: false
+        },
+        { ...defaultOptions, jiraLocation: 'post-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${subject} ${jiraUpperCase} \n\n${jiraUpperCase}`);
+  });
+  it('post-description-and-post-body jiraLocation with body and footer', function() {
+    var footer = `${breakingChange}${breaking}`;
+    expect(
+      commitMessage(
+        {
+          type,
+          scope,
+          jira,
+          subject,
+          body,
+          breaking,
+        },
+        { ...defaultOptions, jiraLocation: 'post-description-and-post-body' }
+      )
+    ).to.equal(`${type}(${scope}): ${subject} ${jiraUpperCase} \n\n${body}\n\n${jiraUpperCase}\n\n${breakingChange}${breaking}`);
+  });
   it('jiraPrepend decorator', function() {
     expect(
       commitMessage(
