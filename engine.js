@@ -34,12 +34,15 @@ module.exports = function(options) {
   var getJiraIssueLocation = function(location, type, scope, jiraWithDecorators, subject) {
     switch(location) {
       case 'pre-type':
+      case 'pre-type-and-post-body':
         return jiraWithDecorators + type + scope + ': ' + subject;
         break;
       case 'pre-description':
+      case 'pre-description-and-post-body':
         return type + scope + ': ' + jiraWithDecorators + subject;
         break;
       case 'post-description':
+      case 'post-description-and-post-body':
         return type + scope + ': ' + subject + ' ' + jiraWithDecorators;
         break;
       case 'post-body':
@@ -259,7 +262,7 @@ module.exports = function(options) {
 
         // Wrap these lines at options.maxLineWidth characters
         var body = answers.body ? wrap(answers.body, wrapOptions) : false;
-        if (options.jiraMode && options.jiraLocation === 'post-body') {
+        if (options.jiraMode && options.jiraLocation.endsWith('post-body')) {
           if (body === false) {
             body = '';
           } else {
