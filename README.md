@@ -63,7 +63,7 @@ Like commitizen, you can specify the configuration of cz-conventional-changelog-
 | CZ_ISSUES            | defaultIssues   | undefined         | A default issue.                                                                                                                                                        |
 | CZ_JIRA_OPTIONAL     | jiraOptional    | false             | If this is set to true, you can leave the JIRA field blank.                                                                                                             |
 | CZ_JIRA_PREFIX       | jiraPrefix      | "DAZ"             | If this is set it will be will be displayed as the default JIRA ticket prefix                                                                                           |
-| CZ_JIRA_LOCATION     | jiraLocation    | "pre-description" | Changes position of JIRA ID. Options: `pre-type`, `pre-description`, `post-description`, `post-body`                                                                    |
+| CZ_JIRA_LOCATION     | jiraLocation    | "pre-description" | Changes position of JIRA ID. Options: `pre-type`, `pre-description`, `post-description`, `post-body`, `pre-type-and-post-body`, `pre-description-and-post-body`, `post-description-and-post-body` |
 | CZ_JIRA_PREPEND      | jiraPrepend     | ""                | Prepends JIRA ID with an optional decorator. e.g.: `[DAZ-1234`                                                                                                          |
 | CZ_JIRA_APPEND       | jiraAppend      | ""                | Appends JIRA ID with an optional decorator. e.g.: `DAZ-1234]`                                                                                                           |
 | CZ_EXCLAMATION_MARK  | exclamationMark | false             | On breaking changes, adds an exclamation mark (!) after the scope, e.g.: `type(scope)!: break stuff`. When activated, reduces the effective allowed header length by 1. |
@@ -93,6 +93,48 @@ JIRA-1234
 ```
 ```text
 type(scope): commit subject
+
+this is a commit body
+
+JIRA-1234
+```
+
+pre-type-and-post-body:
+```text
+JIRA-1234 type(scope): commit subject
+
+JIRA-1234
+```
+```text
+JIRA-1234 type(scope): commit subject
+
+this is a commit body
+
+JIRA-1234
+```
+
+pre-description-and-post-body:
+```text
+type(scope): JIRA-1234 commit subject
+
+JIRA-1234
+```
+```text
+type(scope): JIRA-1234 commit subject
+
+this is a commit body
+
+JIRA-1234
+```
+
+post-description-and-post-body:
+```text
+type(scope): commit subject JIRA-1234
+
+JIRA-1234
+```
+```text
+type(scope): commit subject JIRA-1234 
 
 this is a commit body
 
